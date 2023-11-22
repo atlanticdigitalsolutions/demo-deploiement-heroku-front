@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppServiceService } from 'src/service/app-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'gestion des employes';
+employees: any;
+
+  constructor(
+    private appService: AppServiceService,
+  ){}
+
+  ngOnInit(): void{
+    this.getAll();
+  }
+
+  getAll(){
+    this.appService.getAllEmployees().subscribe(data => {
+      this.employees = data
+      console.log(data)
+    })
+  }
 }
